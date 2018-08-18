@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
 import TaskList from './components/TaskList';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-class App extends Component {
+
+class App extends React.Component {
   render() {
     return (
-      <div className="App">
-          <TaskList />
-      </div>
+      <MuiThemeProvider>
+        <div className="App">
+          <TaskList
+          />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
 
-export default App;
+export default App
