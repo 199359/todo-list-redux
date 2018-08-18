@@ -2,9 +2,8 @@ import React from 'react'
 import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { addTaskAction, onChangeTextAction } from '../../state/taskList'
+import { addTaskAction, onChangeTextAction, deleteTaskAction } from '../../state/taskList'
 import { connect } from 'react-redux'
-import ListOfTasks from './ListOfTasks'
 import {
     Table,
     TableBody,
@@ -13,6 +12,7 @@ import {
     TableRow,
     TableRowColumn,
 } from 'material-ui/Table';
+import FlatButton from 'material-ui/FlatButton';
 
 const style = {
     margin: 12,
@@ -30,7 +30,7 @@ const TaskList = (props) => (
                 hintText="Type new task ..."
                 type='text'
             />
-            <RaisedButton onClick={props._addTaskAction} label="Secondary" secondary={true} style={style} />
+            <RaisedButton onClick={props._addTaskAction} label="Add task" secondary={true} style={style} />
         </div>
         <div>
             <Table>
@@ -39,14 +39,16 @@ const TaskList = (props) => (
                         <TableHeaderColumn>Date</TableHeaderColumn>
                         <TableHeaderColumn>Name of task</TableHeaderColumn>
                         <TableHeaderColumn>Status</TableHeaderColumn>
+                        <TableHeaderColumn></TableHeaderColumn>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {props._tasks.map(el => (
                         <TableRow>
-                            <TableRowColumn>1</TableRowColumn>
+                            <TableRowColumn>{el.date}</TableRowColumn>
                             <TableRowColumn>{el.taskName}</TableRowColumn>
-                            <TableRowColumn>Employed</TableRowColumn>
+                            <TableRowColumn>{el.isCompleted ? 'Task completed' : 'Still to do'}</TableRowColumn>
+                            <TableRowColumn><FlatButton onClick={()=>props._deleteTaskAction(el.uid)} label="DELETE" /></TableRowColumn>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -63,6 +65,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     _addTaskAction: () => dispatch(addTaskAction()),
     _onChangeTextAction: (value) => dispatch(onChangeTextAction(value)),
+    _deleteTaskAction: (uid) => dispatch(deleteTaskAction(uid))
 })
 
 
