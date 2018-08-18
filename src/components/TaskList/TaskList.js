@@ -2,7 +2,7 @@ import React from 'react'
 import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { addTaskAction } from '../../state/taskList'
+import { addTaskAction, onChangeTextAction } from '../../state/taskList'
 import { connect } from 'react-redux'
 
 const style = {
@@ -17,20 +17,26 @@ const TaskList = (props) => (
         />
         <div style={{ display: 'inline-flex' }} >
             <TextField
+                onChange={(e)=>props._onChangeTextAction(e)}
                 hintText="Type new task ..."
+                type='text'
             />
             <RaisedButton onClick={props._addTaskAction} label="Secondary" secondary={true} style={style} />
         </div>
-        <p>TaskList</p>
+        {props._tasks.map(el=>(
+            <p>{el.taskName ? el.taskName : 'Nothing to display'}</p>
+        ))}
     </div>
 )
+
 
 const mapStateToProps = (state) => ({
     _tasks: state.tasklist.tasks
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    _addTaskAction: () => dispatch(addTaskAction())
+    _addTaskAction: () => dispatch(addTaskAction()),
+    _onChangeTextAction: (value) =>  dispatch(onChangeTextAction(value))
 })
 
 
