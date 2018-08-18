@@ -20,11 +20,7 @@ const ListOfTasks = (store) => (
             </TableHeader>
             <TableBody>
 
-                <TableRow>
-                    <TableRowColumn>1</TableRowColumn>
-                    <TableRowColumn>Aaaaaa</TableRowColumn>
-                    <TableRowColumn>Employed</TableRowColumn>
-                </TableRow>
+
             </TableBody>
         </Table>
     </div>
