@@ -24,13 +24,14 @@ const TaskList = (props) => (
             title="ToDo Lista"
             iconClassNameRight="muidocs-icon-navigation-expand-more"
         />
+        
         <div style={{ display: 'inline-flex' }} >
             <TextField
                 onChange={(e) => props._onChangeTextAction(e)}
                 hintText="Type new task ..."
                 type='text'
             />
-            <RaisedButton onClick={props._addTaskAction} label="Add task" secondary={true} style={style} />
+            <RaisedButton onClick={()=>props._addTaskAction(props.user_uid)} label="Add task" secondary={true} style={style} />
         </div>
         <div>
             <Table>
@@ -59,11 +60,14 @@ const TaskList = (props) => (
 
 
 const mapStateToProps = (state) => ({
-    _tasks: state.tasklist.tasks
+    _tasks: state.tasklist.tasks,
+    _uid: state.auth.user.uid,
+    user_uid: state.auth.user.uid
+
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    _addTaskAction: () => dispatch(addTaskAction()),
+    _addTaskAction: (user_uid) => dispatch(addTaskAction(user_uid)),
     _onChangeTextAction: (value) => dispatch(onChangeTextAction(value)),
     _deleteTaskAction: (uid) => dispatch(deleteTaskAction(uid))
 })

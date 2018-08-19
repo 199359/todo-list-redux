@@ -5,7 +5,7 @@ export const CHANGE_TEXT = 'CHANGE_TEXT'
 export const DELETE_TASK = 'DELETE TASK'
 
 
-export const addTaskAction = () => ({ type: ADD_TASK })
+export const addTaskAction = (user_uid) => ({ type: ADD_TASK, user_uid: user_uid })
 export const onChangeTextAction = (e) => ({ type: CHANGE_TEXT, text: e.target.value })
 export const deleteTaskAction = (uid) => ({type: DELETE_TASK, uid: uid})
 
@@ -25,7 +25,8 @@ const reducer = (state = initialStore, action) => {
                     taskName: state.newTaskText,
                     isCompleted: false,
                     uid: Date.now(),
-                    date: moment(new Date(Date.now()).toUTCString()).calendar()
+                    date: moment(new Date(Date.now()).toUTCString()).calendar(),
+                    user_uid: action.user_uid
                 })
             }
         case CHANGE_TEXT:
