@@ -11,7 +11,7 @@ export const logOut = () => ({type: LOG_OUT})
 export const logIn = () => (dispatch, getState) => {
     auth.signInWithPopup(googleProvider)
     // .then(response => response.json())
-    .then(data => {dispatch(setUser(data.user))
+    .then(data => {dispatch(setUser(data.user.toJSON()))
         dispatch(setLoginStatus())
     })
         // .then(result => setUser(result.user))
@@ -20,12 +20,12 @@ export const logIn = () => (dispatch, getState) => {
 
 
 const initialState = {
-    isLoggedIn: true,
+    isLoggedIn: false,
     userName: 'Krzysztof Krawczyk',
     signInFlow: 'popup',
     signInOption: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     callbacks: {signInSuccess: ()=> false},
-    user: null
+    user: {}
 }
 
 const reducer = (state = initialState, action) => {
@@ -44,7 +44,7 @@ const reducer = (state = initialState, action) => {
         return {
             ...state,
             isLoggedIn: false,
-            user: null
+            user: {displayName: ''}
         }
     }
     return state

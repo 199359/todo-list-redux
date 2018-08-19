@@ -10,13 +10,14 @@ const Auth = (props) => {
         <div>{props._isLoggedIn
             ?
             <div>
-                <p>{'zalogowany: ' + props._userName}</p>
+                <p>{'Witaj ' + props._userName + '!'}</p>
                 <button onClick={() => props._logOut()}>Wyloguj</button>
+                {console.log(props._userName)}
             </div>
             :
             <div>
-                <p>Niezalogowany</p>
-                <button onClick={props._logIn}>Zaloguj</button>
+                <p>Zaloguj się, aby wyświetlić swoje zadania</p>
+                <button onClick={props._logIn}>Zaloguj za pomocą konta Google</button>
             </div>
         }
         </div>
@@ -34,7 +35,7 @@ export const middleware = () => {
 
 const mapStateToProps = (state) => ({
     _isLoggedIn: state.auth.isLoggedIn,
-    _userName: state.auth.userName,
+    _userName: state.auth.user.displayName,
     _signInFlow: state.auth.signInFlow,
     _signInOption: state.auth.signInOption,
     _callbacks: state.auth.callbacks
