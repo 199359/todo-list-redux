@@ -24,14 +24,20 @@ const TaskList = (props) => (
             title="ToDo Lista"
             iconClassNameRight="muidocs-icon-navigation-expand-more"
         />
-        
         <div style={{ display: 'inline-flex' }} >
-            <TextField
-                onChange={(e) => props._onChangeTextAction(e)}
-                hintText="Type new task ..."
-                type='text'
-            />
-            <RaisedButton onClick={()=>props._addTaskAction(props.user_uid)} label="Add task" secondary={true} style={style} />
+            {props._isLoggedIn ?
+                <div>
+                    <TextField
+                        onChange={(e) => props._onChangeTextAction(e)}
+                        hintText="Type new task ..."
+                        type='text'
+
+                    />
+                    <RaisedButton onClick={() => props._addTaskAction(props.user_uid)} label="Add task" secondary={true} style={style} />
+                </div>
+                :
+                <p>Zaloguj się, aby wyświtlić listę</p>
+            }
         </div>
         <div>
             <Table>
@@ -49,7 +55,7 @@ const TaskList = (props) => (
                             <TableRowColumn>{el.date}</TableRowColumn>
                             <TableRowColumn>{el.taskName}</TableRowColumn>
                             <TableRowColumn>{el.isCompleted ? 'Task completed' : 'Still to do'}</TableRowColumn>
-                            <TableRowColumn><FlatButton onClick={()=>props._deleteTaskAction(el.uid)} label="DELETE" /></TableRowColumn>
+                            <TableRowColumn><FlatButton onClick={() => props._deleteTaskAction(el.uid)} label="DELETE" /></TableRowColumn>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -62,8 +68,8 @@ const TaskList = (props) => (
 const mapStateToProps = (state) => ({
     _tasks: state.tasklist.tasks,
     _uid: state.auth.user.uid,
-    user_uid: state.auth.user.uid
-
+    user_uid: state.auth.user.uid,
+    _isLoggedIn: state.auth.isLoggedIn
 })
 
 const mapDispatchToProps = (dispatch) => ({
