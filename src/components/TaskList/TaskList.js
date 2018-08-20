@@ -45,16 +45,14 @@ const TaskList = (props) => (
                     <TableRow>
                         <TableHeaderColumn>Date</TableHeaderColumn>
                         <TableHeaderColumn>Name of task</TableHeaderColumn>
-                        <TableHeaderColumn>Status</TableHeaderColumn>
                         <TableHeaderColumn></TableHeaderColumn>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {props._tasks.map(el => (
+                    {props._tasks.filter(el=>el.user_uid===props._user_uid).map(el => (
                         <TableRow>
                             <TableRowColumn>{el.date}</TableRowColumn>
                             <TableRowColumn>{el.taskName}</TableRowColumn>
-                            <TableRowColumn>{el.isCompleted ? 'Task completed' : 'Still to do'}</TableRowColumn>
                             <TableRowColumn><FlatButton onClick={() => props._deleteTaskAction(el.uid)} label="DELETE" /></TableRowColumn>
                         </TableRow>
                     ))}
@@ -69,7 +67,8 @@ const mapStateToProps = (state) => ({
     _tasks: state.tasklist.tasks,
     _uid: state.auth.user.uid,
     user_uid: state.auth.user.uid,
-    _isLoggedIn: state.auth.isLoggedIn
+    _isLoggedIn: state.auth.isLoggedIn,
+    _user_uid: state.auth.user.uid,
 })
 
 const mapDispatchToProps = (dispatch) => ({
