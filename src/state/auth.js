@@ -10,12 +10,9 @@ export const logOut = () => ({type: LOG_OUT})
 
 export const logIn = () => (dispatch, getState) => {
     auth.signInWithPopup(googleProvider)
-    // .then(response => response.json())
     .then(data => {dispatch(setUser(data.user.toJSON()))
         dispatch(setLoginStatus())
     })
-        // .then(result => setUser(result.user))
-        // .then(user => setLoginStatus())
 }
 
 
@@ -46,6 +43,7 @@ const reducer = (state = initialState, action) => {
             isLoggedIn: false,
             user: {displayName: ''}
         }
+        default: state
     }
     return state
 }

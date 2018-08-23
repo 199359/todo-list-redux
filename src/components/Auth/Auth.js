@@ -1,9 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { setLoginStatus, setUser, logOut, logIn } from '../../state/auth'
-import {applyMiddleware} from 'redux'
-
-
 
 const Auth = (props) => {
     return (
@@ -12,7 +9,6 @@ const Auth = (props) => {
             <div>
                 <p>{'Witaj ' + props._userName + '!'}</p>
                 <button onClick={() => props._logOut()}>Wyloguj</button>
-                {console.log(props._userName)}
             </div>
             :
             <div>
@@ -23,15 +19,6 @@ const Auth = (props) => {
         </div>
     )
 }
-
-const logger = () => {
-    console.log()
-}
-
-export const middleware = () => {
-    applyMiddleware(logger)
-}
-
 
 const mapStateToProps = (state) => ({
     _isLoggedIn: state.auth.isLoggedIn,

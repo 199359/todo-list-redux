@@ -24,9 +24,8 @@ const reducer = (state = initialStore, action) => {
                 tasks: state.tasks.concat({
                     taskName: state.newTaskText,
                     isCompleted: false,
-                    uid: Date.now(),
                     date: moment(new Date(Date.now()).toUTCString()).calendar(),
-                    user_uid: action.user_uid
+                    user_uid: action.user_uid,
                 })
             }
         case CHANGE_TEXT:

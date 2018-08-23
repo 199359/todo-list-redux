@@ -50,7 +50,7 @@ const TaskList = (props) => (
                 </TableHeader>
                 <TableBody>
                     {props._tasks.filter(el=>el.user_uid===props._user_uid).map(el => (
-                        <TableRow>
+                        <TableRow key={Math.random()}>
                             <TableRowColumn>{el.date}</TableRowColumn>
                             <TableRowColumn>{el.taskName}</TableRowColumn>
                             <TableRowColumn><FlatButton onClick={() => props._deleteTaskAction(el.uid)} label="DELETE" /></TableRowColumn>
