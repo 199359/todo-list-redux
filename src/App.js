@@ -8,14 +8,11 @@ import firebase from 'firebase'
 
 class App extends React.Component {  
   
+  componentWillMount(){
+    
+  }
   
   render() {
-        // {firebase.auth().onAuthStateChanged(user ?
-        //   'uzytkownik'
-        //   :
-        //   firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider()))
-        // }
-
     return (
       <MuiThemeProvider>
         <div className="App">
